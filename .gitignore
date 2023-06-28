@@ -1,0 +1,5 @@
+browser/
+log.html
+output*.xml
+report.html
+pabot_results/**
