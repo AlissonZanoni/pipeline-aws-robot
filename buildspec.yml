@@ -1,15 +1,20 @@
 version: 0.2
+
 phases:
   install:
     commands:
       - python -V
       - pip install -r requirements.txt
+      - sudo apt-get update
+      - sudo apt-get install xvfb
+
   pre_build:
     commands:
       - pip show robotframework
       - rfbrowser init
       - playwright install chromium
       - npx playwright install-deps
+
   build:
     commands:
       - python -m robot --headless -v from:aws -v env:beta tests/
@@ -18,8 +23,13 @@ phases:
       - mv log.html $FOLDER
       - mv report.html $FOLDER/index.html
       - mv *.png $FOLDER
+
 artifacts:
   files:
     - '**/*.html'
     - '**/*.png'
   name: log-report
+
+cache:
+  paths:
+    - '/root/.pyenv/versions/3.11.2'
