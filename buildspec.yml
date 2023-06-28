@@ -1,22 +1,17 @@
 version: 0.2
 phases:
   install:
+    runtime-versions:
+      python: 3.9
     commands:
       - python -V
-      - pip install -r .\requirements.txt
-      # specify timezone to Asia/Taipei
-      - apk add --no-cache tzdata
-      - ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
-      - echo "Asia/Taipei" > /etc/timezone
-  pre_build:
-    commands:
-      - pip show robotframework
+      - pip install -r requirements.txt
   build:
     commands:
-      # in order to not block the pipeline process when test fail
-      # add a pipe behind the test command and always return true
-      - python -m robot -v from:aws -v env:beta testcases/ || true
-      # collect test report assets
+      - apk add --no-cache tzdata
+      - ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+      - echo "America/Sao_Paulo" > /etc/timezone
+      - python -m robot -v from:aws -v env:beta tests/ || true
       - export FOLDER=$(date +%Y-%m-%d_%H:%M)
       - mkdir $FOLDER
       - mv log.html $FOLDER
