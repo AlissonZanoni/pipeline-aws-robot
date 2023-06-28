@@ -1,0 +1,29 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - python -V
+      - pip install -r .\requirements.txt
+      # specify timezone to Asia/Taipei
+      - apk add --no-cache tzdata
+      - ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+      - echo "Asia/Taipei" > /etc/timezone
+  pre_build:
+    commands:
+      - pip show robotframework
+  build:
+    commands:
+      # in order to not block the pipeline process when test fail
+      # add a pipe behind the test command and always return true
+      - python -m robot -v from:aws -v env:beta testcases/ || true
+      # collect test report assets
+      - export FOLDER=$(date +%Y-%m-%d_%H:%M)
+      - mkdir $FOLDER
+      - mv log.html $FOLDER
+      - mv report.html $FOLDER/index.html
+      - mv *.png $FOLDER
+artifacts:
+  files:
+    - '**/*.html'
+    - '**/*.png'
+  name: log-report
