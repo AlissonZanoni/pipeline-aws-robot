@@ -7,7 +7,6 @@ phases:
   pre_build:
     commands:
       - pip show robotframework
-      - pip show Browser
       - rfbrowser init
       - playwright install chromium
       - npx playwright install-deps
