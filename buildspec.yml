@@ -12,7 +12,7 @@ phases:
       - npx playwright install-deps
   build:
     commands:
-      - python -m robot -v from:aws -v env:beta tests/
+      - python -m robot --headless -v from:aws -v env:beta tests/
       - export FOLDER=$(date +%Y-%m-%d_%H:%M)
       - mkdir $FOLDER
       - mv log.html $FOLDER
