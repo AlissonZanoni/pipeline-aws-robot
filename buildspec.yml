@@ -17,12 +17,12 @@ phases:
 
   build:
     commands:
-      - python -m robot --headless -v from:aws -v env:beta tests/
+      - xvfb-run -a python -m robot -v from:aws -v env:beta tests/
       - export FOLDER=$(date +%Y-%m-%d_%H:%M)
       - mkdir $FOLDER
       - mv log.html $FOLDER
       - mv report.html $FOLDER/index.html
-      - mv *.png $FOLDER
+      - mv *.png $FOLDERs
 
 artifacts:
   files:
