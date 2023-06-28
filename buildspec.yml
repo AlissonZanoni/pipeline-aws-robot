@@ -7,6 +7,10 @@ phases:
   pre_build:
     commands:
       - pip show robotframework
+      - pip show Browser
+      - rfbrowser init
+      - playwright install chromium
+      - npx playwright install-deps
   build:
     commands:
       - python -m robot -v from:aws -v env:beta tests/
