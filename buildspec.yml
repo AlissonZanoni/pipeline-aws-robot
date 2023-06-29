@@ -22,7 +22,7 @@ phases:
       - mkdir $FOLDER
       - mv log.html $FOLDER
       - mv report.html $FOLDER/index.html
-      - mv *.png $FOLDERs
+      - mv *.png $FOLDER
 
 artifacts:
   files:
