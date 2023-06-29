@@ -7,8 +7,9 @@ phases:
       - pip install --cache-dir $HOME/.pip-cache -r requirements.txt
       - sudo apt-get update
       - sudo apt-get install -y xvfb
+      - pip install --cache-dir $HOME/.pip-cache playwright
       - npx playwright install chromium --use-cache
-      - npx playwright install-deps --use-cache || (echo "Failed to install Playwright dependencies, using cache" && true)
+      - npx playwright install-deps --use-cache
 
   pre_build:
     commands:
