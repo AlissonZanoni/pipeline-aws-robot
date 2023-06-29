@@ -3,3 +3,4 @@ robotframework-browser==16.0.0
 robotframework-pabot==2.15.0
 robotframework-requests==0.9.4
 robotframework-databaselibrary==1.2.4
+playwright==1.30.0
