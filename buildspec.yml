@@ -8,8 +8,9 @@ phases:
       - sudo apt-get update
       - sudo apt-get install -y xvfb
       - pip install --cache-dir $HOME/.pip-cache playwright
-      - npx playwright install chromium --use-cache
-      - npx playwright install-deps --use-cache
+      - npx playwright install chromium --with-deps
+
+
 
   pre_build:
     commands:
