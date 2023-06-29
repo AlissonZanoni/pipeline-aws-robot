@@ -2,18 +2,18 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      python: 3.8
     commands:
-      - python -V
-      - pip install -r requirements.txt
+      - python -m pip install --upgrade pip
+      - pip install --cache-dir $HOME/.pip-cache -r requirements.txt
       - sudo apt-get update
-      - sudo apt-get install xvfb
+      - sudo apt-get install -y xvfb
 
   pre_build:
     commands:
       - pip show robotframework
       - rfbrowser init
-      - playwright install chromium
-      - npx playwright install-deps
 
   build:
     commands:
@@ -28,8 +28,3 @@ artifacts:
     - '**/*.html'
     - '**/*.png'
   name: log-report
-
-cache:
-  Type: LOCAL
-    Modes:
-      - LOCAL_CUSTOM_CACHE
